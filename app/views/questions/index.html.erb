@@ -1,0 +1,12 @@
+<table>
+  <tr>
+    <th>Question</th>
+    <th>Created at</th>
+  </tr>
+  <% @questions.each do |question| %>
+    <tr>
+      <td><%= link_to question.question, question %></td>
+      <td><%= "#{time_ago_in_words(question.created_at)} ago." %></td>
+    </tr>
+  <% end %>
+</table>

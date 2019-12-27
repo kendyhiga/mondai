@@ -1,0 +1,4 @@
+<%= @question.question %><br>
+<%= "Sent by: #{@question.user.email}" %><br>
+
+<%= link_to 'Add answer', new_question_answer_path(@question) %>
