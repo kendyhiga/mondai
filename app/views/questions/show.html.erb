@@ -2,7 +2,7 @@
 <%= "Sent by: #{@question.user.email}" %><br>
 
 <% @answers.each do |answer| %>
-  <%= answer.content %>
+  <%= answer.content %><br>
 <% end %>
 
 <%= link_to 'Add answer', new_question_answer_path(@question) %>

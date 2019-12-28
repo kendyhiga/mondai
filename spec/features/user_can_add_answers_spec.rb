@@ -17,4 +17,27 @@ feature 'user can add answers' do
     expect(page).to have_content('Answer added')
     expect(page).to have_content('Ruby')
   end
+
+  scenario 'and can add multiple answers' do
+    user = User.create!(email: 'user@email.com', password: 123456)
+    question = Question.create!(content: 'Rails is based upon which development language?', user: user)
+    Answer.create!(content: 'Ruby', user: user, question: question)
+    Answer.create!(content: 'Java', user: user, question: question)
+    Answer.create!(content: 'Python', user: user, question: question)
+
+    login_as user
+    visit root_path
+    click_on 'Your questions'
+    click_on question.content
+    click_on 'Add answer'
+    fill_in 'Content', with: 'Elixir'
+    click_on 'Add'
+
+    expect(page).to have_content(question.content)
+    expect(page).to have_content('Answer added')
+    expect(page).to have_content('Ruby')
+    expect(page).to have_content('Java')
+    expect(page).to have_content('Python')
+    expect(page).to have_content('Elixir')
+  end
 end
