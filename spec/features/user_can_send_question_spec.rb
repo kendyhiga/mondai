@@ -7,7 +7,7 @@ feature 'user can send question' do
     login_as user
     visit root_path
     click_on 'Send new question'
-    fill_in 'Question', with: 'Rails is based upon which development language?'
+    fill_in 'Content', with: 'Rails is based upon which development language?'
     click_on 'Send'
 
     expect(page).to have_content('Question registered successfully')
@@ -22,10 +22,10 @@ feature 'user can send question' do
     login_as user
     visit root_path
     click_on 'Send new question'
-    fill_in 'Question', with: ''
+    fill_in 'Content', with: ''
     click_on 'Send'
 
-    expect(page).to have_content("Question can't be blank")
+    expect(page).to have_content("Content can't be blank")
     expect(page).not_to have_content('Question registered successfully')
     expect(page).not_to have_content('Rails is based upon which development language?')
     expect(page).not_to have_content("Sent by: #{user.email}")
