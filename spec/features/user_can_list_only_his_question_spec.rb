@@ -12,6 +12,7 @@ feature 'user can list only his questions' do
     visit root_path
     click_on 'Your questions'
 
+    expect(current_path).to eq(questions_path)
     expect(page).to have_link(question.content)
     expect(page).to have_link(other_question.content)
     expect(page).not_to have_link(other_user_question.content)

@@ -1,8 +1,18 @@
 <%= @question.content %><br>
 <%= "Sent by: #{@question.user.email}" %><br>
+<%= link_to 'Edit question', edit_question_path %><br>
 
-<% @answers.each do |answer| %>
-  <%= answer.content %><br>
-<% end %>
+<table>
+  <% @answers.each do |answer| %>
+    <tr>
+      <td><%= link_to answer.content, edit_question_answer_path(@question, answer) %></td>
+      <% if answer.right? %>
+        <td><%= link_to 'Right answer', root_path %></td>
+      <% else %>
+        <td><%= link_to 'Choose as right answer', question_answer_set_as_right_path(@question, answer), id: answer.id %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
 
 <%= link_to 'Add answer', new_question_answer_path(@question) %>

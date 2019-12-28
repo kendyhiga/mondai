@@ -1,5 +1,2 @@
-<%= form_with model: @question, local: true do |f| %>
-  <%= f.label :content %>
-  <%= f.text_area :content %>
-  <%= f.submit 'Send' %>
-<% end %>
+<h1>New question</h1>
+<%= render 'form' %>

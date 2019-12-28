@@ -11,8 +11,9 @@ feature 'user can add answers' do
     click_on question.content
     click_on 'Add answer'
     fill_in 'Content', with: 'Ruby'
-    click_on 'Add'
+    click_on 'Send'
 
+    expect(current_path).to eq(question_path(question))
     expect(page).to have_content(question.content)
     expect(page).to have_content('Answer added')
     expect(page).to have_content('Ruby')
@@ -31,8 +32,9 @@ feature 'user can add answers' do
     click_on question.content
     click_on 'Add answer'
     fill_in 'Content', with: 'Elixir'
-    click_on 'Add'
+    click_on 'Send'
 
+    expect(current_path).to eq(question_path(question))
     expect(page).to have_content(question.content)
     expect(page).to have_content('Answer added')
     expect(page).to have_content('Ruby')
