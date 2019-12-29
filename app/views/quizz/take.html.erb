@@ -1,12 +1,16 @@
-<%= form_with url: 'result_quizz', local: true do |f| %>
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-  <% @questions.each_with_index do |question, index| %>
-    <%= question.content %><br>
-    <% question.answers.shuffle.each do |answer| %>
-      <%= f.radio_button index, answer.id %>
-      <%= f.label index, answer.content, value: answer.id %><br>
+<% if @questions.any? %>
+  <%= form_with url: 'result_quizz', local: true do |f| %>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <% @questions.each_with_index do |question, index| %>
+      <%= question.content %><br>
+      <% question.answers.shuffle.each do |answer| %>
+        <%= f.radio_button index, answer.id %>
+        <%= f.label index, answer.content, value: answer.id %><br>
+      <% end %>
+      <br>
     <% end %>
-    <br>
+    <%= f.submit 'Send' %>
   <% end %>
-  <%= f.submit 'Send' %>
+<% else %>
+  There's currently no questions available, create one yourself right now: <%= link_to 'create question', new_question_path %>
 <% end %>
