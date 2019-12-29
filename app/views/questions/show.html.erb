@@ -6,11 +6,8 @@
   <% @answers.each do |answer| %>
     <tr>
       <td><%= link_to answer.content, edit_question_answer_path(@question, answer) %></td>
-      <% if answer.right? %>
-        <td><%= link_to 'Right answer', root_path %></td>
-      <% else %>
-        <td><%= link_to 'Choose as right answer', question_answer_set_as_right_path(@question, answer), id: answer.id %></td>
-      <% end %>
+      <td><%= link_to answer.right? ?  'Right answer' : 'Choose as right answer',
+              question_answer_set_as_right_path(@question, answer), id: answer.id %></td>
     </tr>
   <% end %>
 </table>

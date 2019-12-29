@@ -1,6 +1,6 @@
 <h1>New answer</h1>
 <%= form_with url: question_answers_path, local: true do |f| %>
   <%= f.label :content %>
-  <%= f.text_area :content %>
+  <%= f.text_field :content %>
   <%= f.submit 'Send' %>
 <% end %>

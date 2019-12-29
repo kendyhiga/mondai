@@ -6,4 +6,7 @@ Rails.application.routes.draw do
       get 'set_as_right'
     end
   end
+
+  get 'take_quizz', to: 'quizz#take'
+  post 'result_quizz', to: 'quizz#result'
 end

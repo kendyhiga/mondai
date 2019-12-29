@@ -35,8 +35,8 @@ class AnswersController < ApplicationController
   def set_as_right
     @question = Question.find(params[:question_id])
     @answer = Answer.find(params[:answer_id])
+    @question.right_answer = @answer
 
-    @question.right_answer_id = @answer.id
     if @question.save
       flash[:notice] = 'Right answer choosed'
       redirect_to @question
