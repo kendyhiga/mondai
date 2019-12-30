@@ -1,7 +1,10 @@
-<h1 class='display-1'>Mondai</h1>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Home</li>
+  </ol>
+</nav>
 
 <% if user_signed_in? %>
-  <%= link_to 'Send new question', new_question_path %><br>
-  <%= link_to 'Your questions', questions_path %><br>
+  <%= link_to 'Manage your questions', questions_path %><br>
   <%= link_to 'Take a quizz', take_quizz_path %><br>
 <% end %>

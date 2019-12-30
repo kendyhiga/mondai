@@ -1,12 +1,24 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"><%= link_to 'Home', root_path %></a></li>
+    <li class="breadcrumb-item active" aria-current="page">Manage your questions</li>
+  </ol>
+</nav>
+
+<%= link_to 'Send new question', new_question_path %><br>
+
 <table class="table">
   <tr>
     <th>Question</th>
     <th>Created at</th>
+    <th>Actions</th>
   </tr>
   <% @questions.each do |question| %>
     <tr>
       <td><%= link_to question.content, question %></td>
       <td><%= "#{time_ago_in_words(question.created_at)} ago." %></td>
+      <td><%= link_to 'Edit', edit_question_path(question), class: 'btn btn-primary' %></td>
+      <td><%= link_to 'Delete', question_path(question), method: :delete, class: 'btn btn-danger' %></td>
     </tr>
   <% end %>
 </table>

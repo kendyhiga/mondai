@@ -1,4 +1,13 @@
-<h1>Edit question</h1>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"><%= link_to 'Home', root_path %></a></li>
+    <li class="breadcrumb-item"><a href="#"><%= link_to 'Manage your questions', questions_path %></a></li>
+    <li class="breadcrumb-item"><a href="#"><%= link_to 'Question', question_path(params[:question_id]) %></a></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit answer</li>
+  </ol>
+</nav>
+
+<h1>Edit answer</h1>
 <%= form_with model: @answer, url: question_answer_path, local: true do |f| %>
   <%= f.label :content %>
   <%= f.text_field :content %>

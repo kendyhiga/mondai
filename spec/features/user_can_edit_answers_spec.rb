@@ -4,13 +4,13 @@ feature 'user can edit answers' do
   scenario 'successfully' do
     user = User.create!(email: 'user@email.com', password: 123456)
     question = Question.create!(content: 'Rails is based upon which development language?', user: user)
-    answer = Answer.create!(content: 'Rubi', user: user, question: question)
+    Answer.create!(content: 'Rubi', user: user, question: question)
 
     login_as user
     visit root_path
-    click_on 'Your questions'
+    click_on 'Manage your questions'
     click_on question.content
-    click_on answer.content
+    click_on 'Edit'
     fill_in 'Content', with: 'Ruby'
     click_on 'Send'
 

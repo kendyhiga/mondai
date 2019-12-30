@@ -16,7 +16,7 @@ class QuestionsController < ApplicationController
       flash[:notice] = 'Question registered successfully'
       redirect_to @question
     else
-      flash[:alert] = @question.errors.full_messages
+      flash.now[:alert] = @question.errors.full_messages
       render :new
     end
   end
@@ -36,7 +36,7 @@ class QuestionsController < ApplicationController
       flash[:notice] = 'Question edited successfully'
       redirect_to @question
     else
-      flash[:alert] = @question.errors.full_messages
+      flash.now[:alert] = @question.errors.full_messages
       render :edit
     end
   end
@@ -44,11 +44,13 @@ class QuestionsController < ApplicationController
   def destroy
     @question = Question.find(params[:id])
     @question.destroy
+    flash[:notice] = 'Question deleted successfully'
+    redirect_to questions_path
   end
 
   private
 
-    def question_params
-      params.require(:question).permit(:content)
-    end
+  def question_params
+    params.require(:question).permit(:content)
+  end
 end

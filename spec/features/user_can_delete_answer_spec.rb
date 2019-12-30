@@ -8,7 +8,7 @@ feature 'user can delete answers' do
 
     login_as user
     visit root_path
-    click_on 'Your questions'
+    click_on 'Manage your questions'
     click_on question.content
     click_on 'Delete answer'
 
@@ -16,5 +16,6 @@ feature 'user can delete answers' do
     expect(page).to have_content(question.content)
     expect(page).to have_content('Answer deleted successfully')
     expect(page).not_to have_content(answer.content)
+    expect { answer.reload }.to raise_error ActiveRecord::RecordNotFound
   end
 end

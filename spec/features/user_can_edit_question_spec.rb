@@ -7,7 +7,7 @@ feature 'user can edit question' do
 
     login_as user
     visit root_path
-    click_on 'Your questions'
+    click_on 'Manage your questions'
     click_on question.content
     click_on 'Edit question'
     fill_in 'Content', with: 'Phoenix is based upon which development language?'
@@ -24,7 +24,7 @@ feature 'user can edit question' do
 
     login_as user
     visit root_path
-    click_on 'Your questions'
+    click_on 'Manage your questions'
     click_on question.content
     click_on 'Edit question'
     fill_in 'Content', with: ''

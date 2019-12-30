@@ -1,10 +1,10 @@
 class QuizzController < ApplicationController
   def take
-    @questions = current_user.questions
+    @questions = current_user.questions.select { |question| question.answers.any? }
   end
 
   def result
-    @questions = current_user.questions
+    @questions = current_user.questions.select { |question| question.answers.any? }
     @score = calculate_score(@questions)
     @right_answers_rate = calculate_score_percentage(@score, @questions.size)
     render :result

@@ -1,1 +1,9 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"><%= link_to 'Home', root_path %></a></li>
+    <li class="breadcrumb-item"><a href="#"><%= link_to 'Take quizz', take_quizz_path %></a></li>
+    <li class="breadcrumb-item active" aria-current="page">Result</li>
+  </ol>
+</nav>
+
 <%= "You got #{@score} out of #{@questions.size} questions right, #{@right_answers_rate}% score!" %>

@@ -10,7 +10,7 @@ feature 'user can list only his questions' do
 
     login_as user
     visit root_path
-    click_on 'Your questions'
+    click_on 'Manage your questions'
 
     expect(current_path).to eq(questions_path)
     expect(page).to have_link(question.content)

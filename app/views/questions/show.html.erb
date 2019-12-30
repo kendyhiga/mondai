@@ -1,15 +1,25 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"><%= link_to 'Home', root_path %></a></li>
+    <li class="breadcrumb-item"><a href="#"><%= link_to 'Manage your questions', questions_path %></a></li>
+    <li class="breadcrumb-item active" aria-current="page">Question</li>
+  </ol>
+</nav>
+
 <div class='h1'><%= @question.content %></div><br>
 <div class='align-right'><%= "Sent by: #{@question.user.email}" %></div><br>
+<%= link_to 'New answer', new_question_answer_path(@question) %><br>
 <%= link_to 'Edit question', edit_question_path %><br>
-<%= link_to 'Add answer', new_question_answer_path(@question) %>
+<%= link_to 'Delete question', question_path, method: :delete %><br>
 
 <table class='table'>
   <% @answers.each do |answer| %>
     <tr>
-      <td><%= link_to answer.content, edit_question_answer_path(@question, answer), class: 'h4' %></td>
+      <td class='h4' ><%= answer.content %></td>
+      <td><%= link_to 'Edit', edit_question_answer_path(@question, answer), class: 'btn btn-primary' %></td>
       <td>
         <% if answer.right? %>
-          <div class='btn btn-success'><%= 'Right answer' %></div>
+          <div class='btn btn-secondary'><%= 'Right answer' %></div>
         <% else %>
           <%= link_to 'Choose as right answer', question_answer_set_as_right_path(@question, answer), id: answer.id, class: 'btn btn-primary' %>
         <% end %>

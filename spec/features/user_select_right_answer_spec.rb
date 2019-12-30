@@ -11,7 +11,7 @@ feature 'user can select right answer' do
 
     login_as user
     visit root_path
-    click_on 'Your questions'
+    click_on 'Manage your questions'
     click_on question.content
     find("##{answer.id}").click
 

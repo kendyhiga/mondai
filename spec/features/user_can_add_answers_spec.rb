@@ -7,9 +7,9 @@ feature 'user can add answers' do
 
     login_as user
     visit root_path
-    click_on 'Your questions'
+    click_on 'Manage your questions'
     click_on question.content
-    click_on 'Add answer'
+    click_on 'New answer'
     fill_in 'Content', with: 'Ruby'
     click_on 'Send'
 
@@ -28,9 +28,9 @@ feature 'user can add answers' do
 
     login_as user
     visit root_path
-    click_on 'Your questions'
+    click_on 'Manage your questions'
     click_on question.content
-    click_on 'Add answer'
+    click_on 'New answer'
     fill_in 'Content', with: 'Elixir'
     click_on 'Send'
 

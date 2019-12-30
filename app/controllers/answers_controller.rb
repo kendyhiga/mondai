@@ -1,4 +1,7 @@
 class AnswersController < ApplicationController
+
+  def index; end
+
   def new
     @answer = Answer.new
   end
@@ -12,7 +15,8 @@ class AnswersController < ApplicationController
       flash[:notice] = 'Answer added'
       redirect_to @question
     else
-      render :new
+      flash[:alert] = @answer.errors.full_messages
+      redirect_to new_question_answer_path
     end
   end
 
@@ -27,7 +31,7 @@ class AnswersController < ApplicationController
       flash[:notice] = 'Answer edited successfully'
       redirect_to @question
     else
-      flash[:alert] = @answer.errors.full_messages
+      flash.now[:alert] = @answer.errors.full_messages
       render :edit
     end
   end

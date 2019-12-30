@@ -1,2 +1,11 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"><%= link_to 'Home', root_path %></a></li>
+    <li class="breadcrumb-item"><a href="#"><%= link_to 'Manage your questions', questions_path %></a></li>
+    <li class="breadcrumb-item"><a href="#"><%= link_to 'Question', question_path %></a></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit question</li>
+  </ol>
+</nav>
+
 <h1>Edit question</h1>
 <%= render 'form' %>

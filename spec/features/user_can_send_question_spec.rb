@@ -6,6 +6,7 @@ feature 'user can send question' do
 
     login_as user
     visit root_path
+    click_on 'Manage your questions'
     click_on 'Send new question'
     fill_in 'Content', with: 'Rails is based upon which development language?'
     click_on 'Send'
@@ -14,7 +15,7 @@ feature 'user can send question' do
     expect(page).to have_content('Question registered successfully')
     expect(page).to have_content('Rails is based upon which development language?')
     expect(page).to have_content("Sent by: #{user.email}")
-    expect(page).to have_link('Add answer')
+    expect(page).to have_link('New answer')
   end
 
   scenario 'and the question cannot be blank' do
@@ -22,6 +23,7 @@ feature 'user can send question' do
 
     login_as user
     visit root_path
+    click_on 'Manage your questions'
     click_on 'Send new question'
     fill_in 'Content', with: ''
     click_on 'Send'
