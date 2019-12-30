@@ -1,7 +1,43 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+user = User.create!(email: 'user@email.com', password: 123456)
+question = Question.create!(content: 'Rails is based upon which development language?', user: user)
+Answer.create!(content: 'Elixir', user: user, question: question)
+right_answer = Answer.create!(content: 'Ruby', user: user, question: question)
+Answer.create!(content: 'Java', user: user, question: question)
+Answer.create!(content: 'Python', user: user, question: question)
+question.update(right_answer_id: right_answer.id)
+
+question = Question.create!(content: 'Given the following code snippet: x = 15 + 5 * 2 - 5, whats the value of x?', user: user)
+right_answer = Answer.create!(content: '20', user: user, question: question)
+Answer.create!(content: '35', user: user, question: question)
+Answer.create!(content: '0', user: user, question: question)
+Answer.create!(content: '-60', user: user, question: question)
+question.update(right_answer_id: right_answer.id)
+
+question = Question.create!(content: 'Which is the correct way of naming a variable in Ruby?', user: user)
+right_answer = Answer.create!(content: 'With snake_case: "first_name"', user: user, question: question)
+Answer.create!(content: 'Putting spaces in it: "first name"', user: user, question: question)
+Answer.create!(content: 'Starting with a number: "1st_name"', user: user, question: question)
+Answer.create!(content: 'With CamelCase: "firstName"', user: user, question: question)
+question.update(right_answer_id: right_answer.id)
+
+other_user = User.create!(email: 'other.user@email.com', password: 123456)
+question = Question.create!(content: '7 * 7', user: other_user)
+right_answer = Answer.create!(content: '49', user: other_user, question: question)
+Answer.create!(content: '47', user: other_user, question: question)
+Answer.create!(content: '42', user: other_user, question: question)
+Answer.create!(content: '51', user: other_user, question: question)
+question.update(right_answer_id: right_answer.id)
+
+question = Question.create!(content: '11 * 11', user: other_user)
+right_answer = Answer.create!(content: '121', user: other_user, question: question)
+Answer.create!(content: '110', user: other_user, question: question)
+Answer.create!(content: '111', user: other_user, question: question)
+Answer.create!(content: '122', user: other_user, question: question)
+question.update(right_answer_id: right_answer.id)
+
+question = Question.create!(content: '1 + 1', user: other_user)
+right_answer = Answer.create!(content: '11', user: other_user, question: question)
+Answer.create!(content: '2', user: other_user, question: question)
+Answer.create!(content: '1', user: other_user, question: question)
+Answer.create!(content: '999', user: other_user, question: question)
+question.update(right_answer_id: right_answer.id)

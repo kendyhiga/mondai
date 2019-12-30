@@ -1,4 +1,4 @@
-class QuizzController < ApplicationController
+class QuizController < ApplicationController
   def take
     @questions = current_user.questions.select { |question| question.answers.any? }
   end

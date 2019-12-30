@@ -7,6 +7,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'take_quizz', to: 'quizz#take'
-  post 'result_quizz', to: 'quizz#result'
+  get 'take_quiz', to: 'quiz#take'
+  post 'result_quiz', to: 'quiz#result'
 end

@@ -1,12 +1,12 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="#"><%= link_to 'Home', root_path %></a></li>
-    <li class="breadcrumb-item active" aria-current="page">Take quizz</li>
+    <li class="breadcrumb-item active" aria-current="page">Take quiz</li>
   </ol>
 </nav>
 
 <% if @questions.any? %>
-  <%= form_with url: 'result_quizz', local: true do |f| %>
+  <%= form_with url: 'result_quiz', local: true do |f| %>
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
     <% @questions.each_with_index do |question, index| %>
       <h4><%= question.content %></h4><br>

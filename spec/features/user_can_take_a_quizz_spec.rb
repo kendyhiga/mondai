@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'user can take a quizz' do
+feature 'user can take a quiz' do
   scenario 'successfully' do
     user = User.create!(email: 'user@email.com', password: 123456)
     question = Question.create!(content: 'Rails is based upon which development language?', user: user)
@@ -26,13 +26,13 @@ feature 'user can take a quizz' do
 
     login_as user
     visit root_path
-    click_on 'Take a quizz'
+    click_on 'Take a quiz'
     choose right_answer.content
     choose second_right_answer.content
     choose third_right_answer.content
     click_on 'Send'
 
-    expect(current_path).to eq(result_quizz_path)
+    expect(current_path).to eq(result_quiz_path)
     expect(page).to have_content('You got 3 out of 3 questions right, 100.0% score!')
   end
 
@@ -61,13 +61,13 @@ feature 'user can take a quizz' do
 
     login_as user
     visit root_path
-    click_on 'Take a quizz'
+    click_on 'Take a quiz'
     choose wrong_answer.content
     choose second_right_answer.content
     choose third_right_answer.content
     click_on 'Send'
 
-    expect(current_path).to eq(result_quizz_path)
+    expect(current_path).to eq(result_quiz_path)
     expect(page).to have_content('You got 2 out of 3 questions right, 66.67% score!')
   end
 
@@ -76,9 +76,9 @@ feature 'user can take a quizz' do
 
     login_as user
     visit root_path
-    click_on 'Take a quizz'
+    click_on 'Take a quiz'
 
-    expect(current_path).to eq(take_quizz_path)
+    expect(current_path).to eq(take_quiz_path)
     expect(page).to have_content("There's currently no questions available, create one yourself right now: ")
     expect(page).to have_link('create question')
   end
