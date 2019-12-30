@@ -17,7 +17,7 @@ feature 'user can select right answer' do
 
     expect(current_path).to eq(question_path(question))
     expect(page).to have_content('Ruby')
-    expect(page).to have_link('Right answer')
+    expect(page).to have_content('Right answer')
     expect(page).to have_content('Java')
     expect(page).to have_content('Python')
     expect(page).to have_content('Elixir')

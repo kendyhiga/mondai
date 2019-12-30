@@ -1,7 +1,6 @@
-<h1>Mondai</h1>
+<h1 class='display-1'>Mondai</h1>
 
 <% if user_signed_in? %>
-  <%= link_to 'Logout', destroy_user_session_path, method: :delete %><br>
   <%= link_to 'Send new question', new_question_path %><br>
   <%= link_to 'Your questions', questions_path %><br>
   <%= link_to 'Take a quizz', take_quizz_path %><br>

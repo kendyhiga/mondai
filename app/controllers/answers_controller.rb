@@ -32,6 +32,14 @@ class AnswersController < ApplicationController
     end
   end
 
+  def destroy
+    @question = Question.find(params[:question_id])
+    @answer = Answer.find(params[:id])
+    @answer.destroy
+    flash[:notice] = 'Answer deleted successfully'
+    redirect_to @question
+  end
+
   def set_as_right
     @question = Question.find(params[:question_id])
     @answer = Answer.find(params[:answer_id])
