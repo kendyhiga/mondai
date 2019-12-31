@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_28_140213) do
+ActiveRecord::Schema.define(version: 2019_12_31_124857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,15 @@ ActiveRecord::Schema.define(version: 2019_12_28_140213) do
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
+  create_table "question_topics", force: :cascade do |t|
+    t.bigint "question_id", null: false
+    t.bigint "topic_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_question_topics_on_question_id"
+    t.index ["topic_id"], name: "index_question_topics_on_topic_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "content", null: false
@@ -33,6 +42,12 @@ ActiveRecord::Schema.define(version: 2019_12_28_140213) do
     t.datetime "updated_at", null: false
     t.integer "right_answer_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,6 +64,8 @@ ActiveRecord::Schema.define(version: 2019_12_28_140213) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "question_topics", "questions"
+  add_foreign_key "question_topics", "topics"
   add_foreign_key "questions", "answers", column: "right_answer_id"
   add_foreign_key "questions", "users"
 end

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :topics
+
   get 'take_quiz', to: 'quiz#take'
   post 'result_quiz', to: 'quiz#result'
 end

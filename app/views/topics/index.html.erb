@@ -1,0 +1,12 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"><%= link_to 'Home', root_path %></a></li>
+    <li class="breadcrumb-item active" aria-current="page">Topics</li>
+  </ol>
+</nav>
+
+<% @topics.each do |topic| %>
+  <%= topic.name %>
+<% end %>
+
+<%= link_to 'Create topic', new_topic_path %>

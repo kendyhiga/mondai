@@ -1,0 +1,13 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"><%= link_to 'Home', root_path %></a></li>
+    <li class="breadcrumb-item"><a href="#"><%= link_to 'Topics', topics_path %></a></li>
+    <li class="breadcrumb-item active" aria-current="page">New topic</li>
+  </ol>
+</nav>
+
+<%= form_with model: @topic, local: true do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit 'Create' %>
+<% end %>
