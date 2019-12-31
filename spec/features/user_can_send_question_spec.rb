@@ -7,15 +7,13 @@ feature 'user can send question' do
     login_as user
     visit root_path
     click_on 'Manage your questions'
-    click_on 'Send new question'
-    fill_in 'Content', with: 'Rails is based upon which development language?'
-    click_on 'Send'
+    fill_in :content, with: 'Rails is based upon which development language?'
+    click_on 'Add'
 
     expect(current_path).to eq(question_path(Question.last))
     expect(page).to have_content('Question registered successfully')
     expect(page).to have_content('Rails is based upon which development language?')
     expect(page).to have_content("Sent by: #{user.email}")
-    expect(page).to have_link('New answer')
   end
 
   scenario 'and the question cannot be blank' do
@@ -24,9 +22,8 @@ feature 'user can send question' do
     login_as user
     visit root_path
     click_on 'Manage your questions'
-    click_on 'Send new question'
-    fill_in 'Content', with: ''
-    click_on 'Send'
+    fill_in :content, with: ''
+    click_on 'Add'
 
     expect(current_path).to eq(questions_path)
     expect(page).to have_content("Content can't be blank")
@@ -37,7 +34,7 @@ feature 'user can send question' do
   end
 
   scenario 'and the user must be logged in' do
-    visit new_question_path
+    visit questions_path
 
     expect(current_path).to eq(new_user_session_path)
     expect(page).to have_content('You need to sign in or sign up before continuing.')

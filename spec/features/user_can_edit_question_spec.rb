@@ -9,11 +9,11 @@ feature 'user can edit question' do
     visit root_path
     click_on 'Manage your questions'
     click_on question.content
-    click_on 'Edit question'
-    fill_in 'Content', with: 'Phoenix is based upon which development language?'
-    click_on 'Send'
+    click_on 'Edit'
+    fill_in 'editing_question', with: 'Phoenix is based upon which development language?'
+    click_on 'Edit'
 
-    expect(current_path).to eq(question_path(question))
+    expect(current_path).to eq(questions_path)
     expect(page).to have_content('Phoenix is based upon which development language?')
     expect(page).to have_content('Question edited successfully')
   end
@@ -26,11 +26,11 @@ feature 'user can edit question' do
     visit root_path
     click_on 'Manage your questions'
     click_on question.content
-    click_on 'Edit question'
-    fill_in 'Content', with: ''
-    click_on 'Send'
+    click_on 'Edit'
+    fill_in 'editing_question', with: ''
+    click_on 'Edit'
 
-    expect(current_path).to eq(question_path(question))
+    expect(current_path).to eq(questions_path)
     expect(page).to have_content("Content can't be blank")
   end
 end

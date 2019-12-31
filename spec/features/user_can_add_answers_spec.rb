@@ -9,9 +9,8 @@ feature 'user can add answers' do
     visit root_path
     click_on 'Manage your questions'
     click_on question.content
-    click_on 'New answer'
-    fill_in 'Content', with: 'Ruby'
-    click_on 'Send'
+    fill_in :content, with: 'Ruby'
+    click_on 'Add'
 
     expect(current_path).to eq(question_path(question))
     expect(page).to have_content(question.content)
@@ -30,9 +29,8 @@ feature 'user can add answers' do
     visit root_path
     click_on 'Manage your questions'
     click_on question.content
-    click_on 'New answer'
-    fill_in 'Content', with: 'Elixir'
-    click_on 'Send'
+    fill_in :content, with: 'Elixir'
+    click_on 'Add'
 
     expect(current_path).to eq(question_path(question))
     expect(page).to have_content(question.content)

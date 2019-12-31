@@ -1,11 +1,5 @@
 class AnswersController < ApplicationController
 
-  def index; end
-
-  def new
-    @answer = Answer.new
-  end
-
   def create
     @question = Question.find(params[:question_id])
     @answer = @question.answers.build(answer_params)
@@ -13,25 +7,27 @@ class AnswersController < ApplicationController
 
     if @answer.save
       flash[:notice] = 'Answer added'
-      redirect_to @question
     else
       flash[:alert] = @answer.errors.full_messages
-      redirect_to new_question_answer_path
     end
+    redirect_to @question
   end
 
   def edit
+    @question = Question.find(params[:question_id])
+    @answers = @question.answers.order(:created_at)
     @answer = Answer.find(params[:id])
   end
 
   def update
     @question = Question.find(params[:question_id])
+    @answers = @question.answers
     @answer = Answer.find(params[:id])
     if @answer.update(params.require(:answer).permit(:content))
       flash[:notice] = 'Answer edited successfully'
       redirect_to @question
     else
-      flash.now[:alert] = @answer.errors.full_messages
+      flash[:alert] = @answer.errors.full_messages
       render :edit
     end
   end

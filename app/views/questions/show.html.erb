@@ -6,11 +6,17 @@
   </ol>
 </nav>
 
-<div class='h1'><%= @question.content %></div><br>
-<div class='align-right'><%= "Sent by: #{@question.user.email}" %></div><br>
-<%= link_to 'New answer', new_question_answer_path(@question) %><br>
-<%= link_to 'Edit question', edit_question_path %><br>
-<%= link_to 'Delete question', question_path, method: :delete %><br>
+<div class='h4'>
+  <%= @question.content %>
+  <span class="badge badge-primary">
+    <%= link_to 'Edit question', edit_question_path, class: 'text-white' %>
+  </span>
+  <span class="badge badge-danger">
+    <%= link_to 'Delete question', question_path, method: :delete, data: { confirm: "Are you sure you want to delete the question: \"#{@question.content}\"?" }, class: 'text-white float-right' %><br>
+  </span>
+</div>
+
+<div class='float-right'><%= "Sent by: #{@question.user.email}" %></div>
 
 <table class='table'>
   <% @answers.each do |answer| %>
@@ -21,10 +27,16 @@
         <% if answer.right? %>
           <div class='btn btn-secondary'><%= 'Right answer' %></div>
         <% else %>
-          <%= link_to 'Choose as right answer', question_answer_set_as_right_path(@question, answer), id: answer.id, class: 'btn btn-primary' %>
+          <%= link_to 'Choose as right answer', question_answer_set_as_right_path(@question, answer), data: { confirm: "Are you sure you want to set the answer: \"#{answer.content}\" as the right one?" }, id: answer.id, class: 'btn btn-primary' %>
         <% end %>
       </td>
-      <td><%= link_to 'Delete answer', question_answer_path(@question, answer), method: :delete, class: 'btn btn-danger' %></td>
+      <td><%= link_to 'Delete answer', question_answer_path(@question, answer), method: :delete, data: { confirm: "Are you sure you want to delete the answer: \"#{answer.content}\"?" }, class: 'btn btn-danger' %></td>
     </tr>
   <% end %>
+    <tr>
+      <%= form_with url: question_answers_path(@question), method: :post, local: true do |f| %>
+        <td><%= f.text_field :content, placeholder: ' New answer', class: 'form-control' %></td>
+        <td><%= f.submit 'Add', class: 'btn btn-success' %></td>
+      <% end %>
+    </tr>
 </table>

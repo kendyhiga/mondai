@@ -7,5 +7,26 @@
   </ol>
 </nav>
 
-<h1>Edit question</h1>
-<%= render 'form' %>
+<%= form_with model: @question, local: true do |f| %>
+  <table class="table">
+    <tr>
+      <th>Question</th>
+      <th>Created at</th>
+      <th colspan="2">Actions</th>
+    </tr>
+    <% @questions.each do |question| %>
+      <tr>
+        <% if question == @question %>
+          <td><%= f.text_field :content, class: 'form-control', id: 'editing_question' %></td>
+          <td><%= "#{time_ago_in_words(question.created_at)} ago." %></td>
+          <td><%= f.submit 'Edit', class: 'btn btn-success' %></td>
+        <% else %>
+          <td><%= link_to question.content, question %></td>
+          <td><%= "#{time_ago_in_words(question.created_at)} ago." %></td>
+          <td><%= link_to 'Edit', edit_question_path(question), class: 'btn btn-primary' %></td>
+          <td><%= link_to 'Delete', question_path(question), method: :delete, class: 'btn btn-danger' %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

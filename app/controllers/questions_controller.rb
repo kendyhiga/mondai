@@ -5,28 +5,24 @@ class QuestionsController < ApplicationController
     @questions = current_user.questions
   end
 
-  def new
-    @question = Question.new
+  def show
+    @question = Question.find(params[:id])
+    @answers = @question.answers.order(:created_at)
   end
 
   def create
-    @question = current_user.questions.build(question_params)
+    @question = current_user.questions.build(params.permit(:content))
 
     if @question.save
       flash[:notice] = 'Question registered successfully'
-      redirect_to @question
     else
-      flash.now[:alert] = @question.errors.full_messages
-      render :new
+      flash[:alert] = @question.errors.full_messages
     end
-  end
-
-  def show
-    @question = Question.find(params[:id])
-    @answers = @question.answers
+    redirect_to @question
   end
 
   def edit
+    @questions = current_user.questions
     @question = Question.find(params[:id])
   end
 
@@ -34,11 +30,10 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     if @question.update(question_params)
       flash[:notice] = 'Question edited successfully'
-      redirect_to @question
     else
-      flash.now[:alert] = @question.errors.full_messages
-      render :edit
+      flash[:alert] = @question.errors.full_messages
     end
+    redirect_to questions_path
   end
 
   def destroy
