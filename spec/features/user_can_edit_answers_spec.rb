@@ -19,4 +19,15 @@ feature 'user can edit answers' do
     expect(page).to have_content('Answer edited successfully')
     expect(page).to have_content('Ruby')
   end
+
+  scenario 'and the user must be logged in' do
+    user = User.create!(email: 'user@email.com', password: 123456)
+    question = Question.create!(content: 'Rails is based upon which development language?', user: user)
+    answer = Answer.create!(content: 'Rubi', user: user, question: question)
+
+    visit edit_question_answer_path(question, answer)
+
+    expect(current_path).to eq(new_user_session_path)
+    expect(page).to have_content('You need to sign in or sign up before continuing.')
+  end
 end
