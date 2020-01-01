@@ -10,10 +10,10 @@
 <div class='h4'>
   <%= @question.content %>
   <span class="badge badge-primary">
-    <%= link_to 'Edit question', edit_question_path, class: 'text-white' %>
+    <%= link_to 'Edit question', edit_question_path(@question), class: 'text-white' %>
   </span>
   <span class="badge badge-danger">
-    <%= link_to 'Delete question', question_path, method: :delete, class: 'text-white float-right' %><br>
+    <%= link_to 'Delete question', question_path(@question), method: :delete, class: 'text-white float-right' %><br>
   </span>
 </div>
 
@@ -25,7 +25,7 @@
       <tr>
         <% if answer == @answer %>
           <td><%= f.text_field :content, placeholder: @answer.content, class: 'form-control', id: 'editing_answer' %></td>
-          <td><%= f.submit 'Edit', class: 'btn btn-success' %></td>
+          <td><%= f.submit 'Save', class: 'btn btn-success' %></td>
         <% else %>
           <td class='h4' ><%= answer.content %></td>
           <td><%= link_to 'Edit', edit_question_answer_path(@question, answer), class: 'btn btn-primary' %></td>

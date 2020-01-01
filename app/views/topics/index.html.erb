@@ -5,8 +5,11 @@
   </ol>
 </nav>
 
-<% @topics.each do |topic| %>
-  <%= topic.name %>
-<% end %>
+<%= link_to 'Create topic', new_topic_path %><br>
 
-<%= link_to 'Create topic', new_topic_path %>
+<h1>Topics:</h1>
+<% @topics.each do |topic| %>
+  <ul>
+    <li><%= topic.name %></li>
+  </ul>
+<% end %>

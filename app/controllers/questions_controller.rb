@@ -24,10 +24,14 @@ class QuestionsController < ApplicationController
   def edit
     @questions = current_user.questions
     @question = Question.find(params[:id])
+    @topics = Topic.all
   end
 
   def update
     @question = Question.find(params[:id])
+    QuestionTopic.create(question_id: @question.id,
+                         topic_id: params[:question][:topic_id]) if params[:question][:topic_id]
+
     if @question.update(question_params)
       flash[:notice] = 'Question edited successfully'
     else

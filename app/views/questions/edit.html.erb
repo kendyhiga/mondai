@@ -8,9 +8,10 @@
 </nav>
 
 <%= form_with model: @question, local: true do |f| %>
-  <table class="table">
+  <table class="table table-hover">
     <tr>
       <th>Question</th>
+      <th>Topics</th>
       <th>Created at</th>
       <th colspan="2">Actions</th>
     </tr>
@@ -18,10 +19,12 @@
       <tr>
         <% if question == @question %>
           <td><%= f.text_field :content, class: 'form-control', id: 'editing_question' %></td>
+          <td><%= question.topics.pluck(:name).join(', ') %><%= f.collection_select :topic_id, @topics, :id, :name, prompt: 'New topic' %></td>
           <td><%= "#{time_ago_in_words(question.created_at)} ago." %></td>
-          <td><%= f.submit 'Edit', class: 'btn btn-success' %></td>
+          <td><%= f.submit 'Save', class: 'btn btn-success' %></td>
         <% else %>
           <td><%= link_to question.content, question %></td>
+          <td><%= question.topics.pluck(:name).join(', ') %></td>
           <td><%= "#{time_ago_in_words(question.created_at)} ago." %></td>
           <td><%= link_to 'Edit', edit_question_path(question), class: 'btn btn-primary' %></td>
           <td><%= link_to 'Delete', question_path(question), method: :delete, class: 'btn btn-danger' %></td>

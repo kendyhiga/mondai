@@ -5,6 +5,8 @@ class Question < ApplicationRecord
              class_name: 'Answer',
              foreign_key: :right_answer_id,
              optional: true
+  has_many :question_topics, dependent: :destroy
+  has_many :topics, through: :question_topics
 
   validates :content, presence: true
 end

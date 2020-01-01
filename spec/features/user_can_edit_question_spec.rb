@@ -11,7 +11,7 @@ feature 'user can edit question' do
     click_on question.content
     click_on 'Edit'
     fill_in 'editing_question', with: 'Phoenix is based upon which development language?'
-    click_on 'Edit'
+    click_on 'Save'
 
     expect(current_path).to eq(questions_path)
     expect(page).to have_content('Phoenix is based upon which development language?')
@@ -28,7 +28,7 @@ feature 'user can edit question' do
     click_on question.content
     click_on 'Edit'
     fill_in 'editing_question', with: ''
-    click_on 'Edit'
+    click_on 'Save'
 
     expect(current_path).to eq(questions_path)
     expect(page).to have_content("Content can't be blank")

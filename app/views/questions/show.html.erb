@@ -18,25 +18,25 @@
 
 <div class='float-right'><%= "Sent by: #{@question.user.email}" %></div>
 
-<table class='table'>
-  <% @answers.each do |answer| %>
-    <tr>
-      <td class='h4' ><%= answer.content %></td>
-      <td><%= link_to 'Edit', edit_question_answer_path(@question, answer), class: 'btn btn-primary' %></td>
-      <td>
-        <% if answer.right? %>
-          <div class='btn btn-secondary'><%= 'Right answer' %></div>
-        <% else %>
-          <%= link_to 'Choose as right answer', question_answer_set_as_right_path(@question, answer), data: { confirm: "Are you sure you want to set the answer: \"#{answer.content}\" as the right one?" }, id: answer.id, class: 'btn btn-primary' %>
-        <% end %>
-      </td>
-      <td><%= link_to 'Delete answer', question_answer_path(@question, answer), method: :delete, data: { confirm: "Are you sure you want to delete the answer: \"#{answer.content}\"?" }, class: 'btn btn-danger' %></td>
-    </tr>
-  <% end %>
-    <tr>
-      <%= form_with url: question_answers_path(@question), method: :post, local: true do |f| %>
+<%= form_with url: question_answers_path(@question), method: :post, local: true do |f| %>
+  <table class='table table-hover'>
+    <% @answers.each do |answer| %>
+      <tr>
+        <td class='h4' ><%= answer.content %></td>
+        <td>
+          <% if answer.right? %>
+            <div class='btn btn-secondary'><%= 'Right answer' %></div>
+          <% else %>
+            <%= link_to 'Choose as right answer', question_answer_set_as_right_path(@question, answer), data: { confirm: "Are you sure you want to set the answer: \"#{answer.content}\" as the right one?" }, id: answer.id, class: 'btn btn-primary' %>
+          <% end %>
+        </td>
+        <td><%= link_to 'Edit', edit_question_answer_path(@question, answer), class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Delete answer', question_answer_path(@question, answer), method: :delete, data: { confirm: "Are you sure you want to delete the answer: \"#{answer.content}\"?" }, class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+      <tr>
         <td><%= f.text_field :content, placeholder: ' New answer', class: 'form-control' %></td>
         <td><%= f.submit 'Add', class: 'btn btn-success' %></td>
-      <% end %>
-    </tr>
-</table>
+      </tr>
+  </table>
+<% end %>

@@ -12,7 +12,7 @@ feature 'user can edit answers' do
     click_on question.content
     click_on 'Edit'
     fill_in 'editing_answer', with: 'Ruby'
-    click_on 'Edit'
+    click_on 'Save'
 
     expect(current_path).to eq(question_path(question))
     expect(page).to have_content(question.content)

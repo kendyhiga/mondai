@@ -5,24 +5,26 @@
   </ol>
 </nav>
 
-<table class="table">
-  <tr>
-    <th>Question</th>
-    <th>Created at</th>
-    <th colspan="2">Actions</th>
-  </tr>
-  <% @questions.each do |question| %>
+<%= form_with url: questions_path, method: :post, local: true do |f| %>
+  <table class="table table-hover">
     <tr>
-      <td><%= link_to question.content, question %></td>
-      <td><%= "#{time_ago_in_words(question.created_at)} ago." %></td>
-      <td><%= link_to 'Edit', edit_question_path(question), class: 'btn btn-primary' %></td>
-      <td><%= link_to 'Delete', question_path(question), method: :delete, class: 'btn btn-danger' %></td>
+      <th>Question</th>
+      <th>Topics</th>
+      <th>Created at</th>
+      <th colspan="2">Actions</th>
     </tr>
-  <% end %>
-  <tr>
-    <%= form_with url: questions_path, method: :post, local: true do |f| %>
-      <td><%= f.text_field :content, placeholder: 'New Question', class: 'form-control' %></td>
-      <td><%= f.submit 'Add', class: 'btn btn-success' %></td>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= link_to question.content, question %></td>
+        <td><%= question.topics.pluck(:name).join(', ') %></td>
+        <td><%= "#{time_ago_in_words(question.created_at)} ago." %></td>
+        <td><%= link_to 'Edit', edit_question_path(question), class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Delete', question_path(question), method: :delete, data: { confirm: "Are you sure you want to delete the question: \"#{question.content}\"?" }, class: 'btn btn-danger' %></td>
+      </tr>
     <% end %>
-  </tr>
-</table>
+    <tr>
+        <td><%= f.text_field :content, placeholder: 'New Question', class: 'form-control' %></td>
+        <td><%= f.submit 'Add', class: 'btn btn-success' %></td>
+    </tr>
+  </table>
+<% end %>

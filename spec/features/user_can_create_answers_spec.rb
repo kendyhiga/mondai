@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'user can add answers' do
+feature 'user can create answers' do
   scenario 'successfully' do
     user = User.create!(email: 'user@email.com', password: 123456)
     question = Question.create!(content: 'Rails is based upon which development language?', user: user)
