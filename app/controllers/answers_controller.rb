@@ -9,7 +9,7 @@ class AnswersController < ApplicationController
     if @answer.save
       flash[:notice] = 'Answer added'
     else
-      flash[:alert] = @answer.errors.full_messages
+      flash[:alert] = @answer.errors.full_messages.join(', ')
     end
     redirect_to @question
   end
@@ -28,7 +28,7 @@ class AnswersController < ApplicationController
       flash[:notice] = 'Answer edited successfully'
       redirect_to @question
     else
-      flash[:alert] = @answer.errors.full_messages
+      flash[:alert] = @answer.errors.full_messages.join(', ')
       render :edit
     end
   end

@@ -5,7 +5,11 @@
   </ol>
 </nav>
 
-<%= link_to 'Create topic', new_topic_path %><br>
+<%= form_with model: @topic, local: true do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit 'Create' %>
+<% end %>
 
 <h1>Topics:</h1>
 <% @topics.each do |topic| %>

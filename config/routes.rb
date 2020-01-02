@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'pages#home'
-  resources :questions do
-    resources :answers do
+  resources :questions, except: [:new] do
+    resources :answers, except: [:new, :show]  do
       get 'set_as_right'
     end
     resources :topics, only: [:destroy]

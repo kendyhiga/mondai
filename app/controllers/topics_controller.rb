@@ -1,23 +1,18 @@
 class TopicsController < ApplicationController
   def index
-    @topics = Topic.all
-  end
-
-  def new
-    @topic = Topic.new
+    @topics = Topic.all.order('created_at DESC')
   end
 
   def create
-    @topic = Topic.new(params.require(:topic).permit(:name))
+    @topic = Topic.new(params.permit(:name))
     @topic.name.capitalize!
 
     if @topic.save
       flash[:notice] = 'Topic created successfully'
-      redirect_to topics_path
     else
-      flash[:alert] = @topic.errors.full_messages
-      render :new
+      flash[:alert] = @topic.errors.full_messages.join(', ')
     end
+    redirect_to topics_path
   end
 
   def destroy

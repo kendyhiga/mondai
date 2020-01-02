@@ -16,7 +16,7 @@ class QuestionsController < ApplicationController
     if @question.save
       flash[:notice] = 'Question registered successfully'
     else
-      flash[:alert] = @question.errors.full_messages
+      flash[:alert] = @question.errors.full_messages.join(', ')
     end
     redirect_to @question
   end
@@ -35,7 +35,7 @@ class QuestionsController < ApplicationController
     if @question.update(question_params)
       flash[:notice] = 'Question edited successfully'
     else
-      flash[:alert] = @question.errors.full_messages
+      flash[:alert] = @question.errors.full_messages.join(', ')
     end
     redirect_to questions_path
   end

@@ -7,7 +7,6 @@ feature 'user can create topics' do
     login_as user
     visit root_path
     click_on 'Topics'
-    click_on 'Create topic'
     fill_in 'Name', with: 'Development'
     click_on 'Create'
 
@@ -22,7 +21,6 @@ feature 'user can create topics' do
     login_as user
     visit root_path
     click_on 'Topics'
-    click_on 'Create topic'
     fill_in 'Name', with: ''
     click_on 'Create'
 
@@ -37,7 +35,6 @@ feature 'user can create topics' do
     login_as user
     visit root_path
     click_on 'Topics'
-    click_on 'Create topic'
     fill_in 'Name', with: 'Development'
     click_on 'Create'
 
@@ -52,7 +49,6 @@ feature 'user can create topics' do
     login_as user
     visit root_path
     click_on 'Topics'
-    click_on 'Create topic'
     fill_in 'Name', with: 'development'
     click_on 'Create'
 
