@@ -17,4 +17,14 @@ feature 'user can list only his questions' do
     expect(page).to have_link(other_question.content)
     expect(page).not_to have_link(other_user_question.content)
   end
+
+  scenario 'and user cannot view this page without being signed-in' do
+    user = User.create!(email: 'user@email.com', password: 123456)
+    question = Question.create!(content: 'Rails is based upon which development language?', user: user)
+
+    visit question_path(question)
+
+    expect(current_path).to eq(new_user_session_path)
+    expect(page).to have_content('You need to sign in or sign up before continuing.')
+  end
 end

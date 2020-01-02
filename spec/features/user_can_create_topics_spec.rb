@@ -15,7 +15,7 @@ feature 'user can create topics' do
     expect(page).to have_content('Development')
   end
 
-  scenario 'and topic name cant be blank' do
+  scenario 'and name cant be blank' do
     user = User.create!(email: 'user@email.com', password: 123456)
 
     login_as user
@@ -28,7 +28,7 @@ feature 'user can create topics' do
     expect(page).to have_content("Name can't be blank")
   end
 
-  scenario 'and topic name must be unique' do
+  scenario 'and name must be unique' do
     user = User.create!(email: 'user@email.com', password: 123456)
     Topic.create!(name: 'Development')
 
@@ -40,9 +40,10 @@ feature 'user can create topics' do
 
     expect(current_path).to eq(topics_path)
     expect(page).to have_content("Name has already been taken")
+    expect(page).to have_content('Development', count: 1)
   end
 
-  scenario 'and topic name uniqueness must not be case sensitive' do
+  scenario 'and name uniqueness must not be case sensitive' do
     user = User.create!(email: 'user@email.com', password: 123456)
     Topic.create!(name: 'Development')
 
