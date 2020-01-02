@@ -19,4 +19,11 @@ class TopicsController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    @topic = QuestionTopic.find_by(question_id: params[:question_id], topic: params[:id])
+    @topic.destroy
+    flash[:notice] = 'Topic removed from question successfully'
+    redirect_to edit_question_path(params[:question_id])
+  end
 end

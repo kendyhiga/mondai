@@ -5,9 +5,10 @@ Rails.application.routes.draw do
     resources :answers do
       get 'set_as_right'
     end
+    resources :topics, only: [:destroy]
   end
 
-  resources :topics
+  resources :topics, only: [:index, :new, :create]
 
   get 'take_quiz', to: 'quiz#take'
   post 'result_quiz', to: 'quiz#result'

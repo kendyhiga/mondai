@@ -19,7 +19,11 @@
       <tr>
         <% if question == @question %>
           <td><%= f.text_field :content, class: 'form-control', id: 'editing_question' %></td>
-          <td><%= question.topics.pluck(:name).join(', ') %><%= f.collection_select :topic_id, @topics, :id, :name, prompt: 'New topic' %></td>
+          <td><% question.topics.each do | topic| %>
+                <%= link_to "#{topic.name} [remove]", question_topic_path(question.id, topic), method: :delete, class: 'badge badge-danger' %>
+              <% end %>
+              <%= f.collection_select :topic_id, @topics, :id, :name, prompt: 'New topic' %>
+          </td>
           <td><%= "#{time_ago_in_words(question.created_at)} ago." %></td>
           <td><%= f.submit 'Save', class: 'btn btn-success' %></td>
         <% else %>
