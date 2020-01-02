@@ -5,7 +5,18 @@
 </nav>
 
 <% if user_signed_in? %>
-  <%= link_to 'Manage your questions', questions_path %><br>
-  <%= link_to 'Topics', topics_path %><br>
-  <%= link_to 'Take a quiz', take_quiz_path %><br>
+  <div class='col-3'>
+    <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <%= link_to 'Manage your questions', questions_path %><br>
+        <span class="badge badge-primary badge-pill"><%= @questions_amount %></span>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <%= link_to 'Topics', topics_path %><br>
+      </li>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <%= link_to 'Take a quiz', take_quiz_path %><br>
+      </li>
+    </ul>
+  </div>
 <% end %>
