@@ -6,7 +6,8 @@ class Answer < ApplicationRecord
           foreign_key: :right_answer_id,
           dependent: :nullify
 
-  validates :content, presence: true
+  validates :content, presence: true,
+                      uniqueness: { scope: :question_id }
 
   def right?
     self == question.right_answer
