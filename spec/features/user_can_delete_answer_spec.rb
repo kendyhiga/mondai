@@ -38,7 +38,7 @@ feature 'user can delete answers' do
     expect { answer.reload }.to raise_error ActiveRecord::RecordNotFound
   end
 
-  xscenario 'and the others answers remain the same' do
+  scenario 'and the others answers remain the same' do
     user = User.create!(email: 'user@email.com', password: 123456)
     question = Question.create!(content: 'Rails is based upon which development language?', user: user)
     answer = Answer.create!(content: 'Ruby', user: user, question: question)
@@ -51,7 +51,7 @@ feature 'user can delete answers' do
     visit root_path
     click_on 'Manage your questions'
     click_on question.content
-    click_on 'Delete answer'
+    click_on "delete_#{answer.id}"
 
     expect(current_path).to eq(question_path(question))
     expect(page).to have_content(question.content)
