@@ -31,7 +31,7 @@
           <% end %>
         </td>
         <td><%= link_to 'Edit', edit_question_answer_path(@question, answer), class: 'btn btn-primary' %></td>
-        <td><%= link_to 'Delete answer', question_answer_path(@question, answer), method: :delete, data: { confirm: "Are you sure you want to delete the answer: \"#{answer.content}\"?" }, class: 'btn btn-danger' %></td>
+        <td><%= link_to 'Delete answer', question_answer_path(@question, answer), method: :delete, data: { confirm: "Are you sure you want to delete the answer: \"#{answer.content}\"?" }, class: 'btn btn-danger', id: "delete_#{answer.id}" %></td>
       </tr>
     <% end %>
       <tr>
