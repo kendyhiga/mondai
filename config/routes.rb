@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get 'set_as_right'
     end
     resources :topics, only: [:destroy]
+    get 'publish', to: 'questions#toggle_publication'
   end
 
   resources :topics, only: [:index, :new, :create]

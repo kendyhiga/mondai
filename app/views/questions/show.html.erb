@@ -7,6 +7,9 @@
 </nav>
 
 <div class='h4'>
+  <span class="badge badge-secondary">
+    <%= @question.published? ? 'Published' : 'Draft' %>
+  </span>
   <%= @question.content %>
   <span class="badge badge-primary">
     <%= link_to 'Edit question', edit_question_path, class: 'text-white' %>
@@ -34,9 +37,12 @@
         <td><%= link_to 'Delete answer', question_answer_path(@question, answer), method: :delete, data: { confirm: "Are you sure you want to delete the answer: \"#{answer.content}\"?" }, class: 'btn btn-danger', id: "delete_#{answer.id}" %></td>
       </tr>
     <% end %>
-      <tr>
-        <td><%= f.text_field :content, placeholder: ' New answer', class: 'form-control' %></td>
-        <td><%= f.submit 'Add', class: 'btn btn-success' %></td>
-      </tr>
+    <tr>
+      <td><%= f.text_field :content, placeholder: ' New answer', class: 'form-control' %></td>
+      <td><%= f.submit 'Add', class: 'btn btn-success' %></td>
+    </tr>
+    <tr>
+      <td colspan="4"><%= link_to (@question.published ? 'Unpublish' : 'Publish'), question_publish_path(question_id: @question.id), class: 'btn btn-primary btn-block' %></td>
+    </tr>
   </table>
 <% end %>

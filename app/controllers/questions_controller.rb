@@ -47,6 +47,19 @@ class QuestionsController < ApplicationController
     redirect_to questions_path
   end
 
+  def toggle_publication
+    @question = Question.find(params[:question_id])
+    @question.toggle(:published)
+
+    if @question.save
+      adverb = 'not ' unless @question.published
+      flash[:notice] = "Question is #{adverb}published"
+    else
+      flash[:alert] = "Question is not published, #{@question.errors.full_messages.join(', ')}"
+    end
+    redirect_to @question
+  end
+
   private
 
   def question_params
