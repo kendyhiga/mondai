@@ -6,6 +6,10 @@ env:
   global:
     - RAILS_ENV=test
 
+before_install:
+  - gem install bundler
+  - gem install bundle-audit
+
 services:
   - postgresql
 
