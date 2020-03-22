@@ -18,4 +18,3 @@ services:
 script:
   - RAILS_ENV=test bundle exec rake db:test:prepare
   - bundle exec rspec
-  - bundle-audit check --update
